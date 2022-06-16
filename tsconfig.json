@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "useDefineForClassFields": true,
+    "outDir": "dist",
+    "noImplicitReturns": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "demo/**/*.d.ts",
+  ],
+  "exclude": [
+    "src/**/*.test.ts"
+  ]
+}

@@ -1,0 +1,27 @@
+node_modules
+test
+src
+script
+coverage
+docs
+demo
+dist
+example
+
+# configuration file
+.czrc
+.editorconfig
+.eslintignore
+.eslintrc
+.eslintrc.js
+.gitignore
+.prettierrc
+.prettierrc.js
+.huskyrc
+.huskyrc.js
+.babelrc
+.babelrc.js
+.commitlint.config
+.commitlint.config.js
+vite.config.js
+tsconfig.*.json
