@@ -1,6 +1,6 @@
 import { PluginWithOptions } from "markdown-it";
 
-interface IMarkdownItConditionOptions {
+interface IMarkdownItIfElseOptions {
   ifConditionMarker: string;
   elseConditionMarker: string;
   elseifConditionMarker: string;
@@ -13,19 +13,16 @@ function beginsWith(text: string, marker: string): boolean {
   return text.substring(0, marker.length) === marker;
 }
 
-export const conditionPlugin: PluginWithOptions<IMarkdownItConditionOptions> = (
-  md,
-  options?: IMarkdownItConditionOptions
-): void => {
+export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, options): void => {
   const {
-    validate = () => true,
     ifConditionMarker = "::if",
     elseConditionMarker = "::else",
     elseifConditionMarker = "::elseif",
     endifConditionMarker = "::endif",
+    validate = () => true,
     evaluateCondition = (condition: string, env: any) => {
-      var fields = condition.split(".");
-      var element = env;
+      const fields = condition.split(".");
+      let element = env;
 
       fields.forEach(function (field) {
         element = element[field];
@@ -140,10 +137,14 @@ export const conditionPlugin: PluginWithOptions<IMarkdownItConditionOptions> = (
   });
 
   md.core.ruler.push("evaluate_condition", (state) => {
+    console.log(state);
+
     let validToken = true;
 
     for (var tokenIndex = 0; tokenIndex < state.tokens.length; tokenIndex++) {
       const token = state.tokens[tokenIndex];
+
+      console.log({ token });
 
       switch (token.type) {
         case "condition_if":

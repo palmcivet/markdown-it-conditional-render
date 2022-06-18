@@ -1,10 +1,12 @@
 
-- [概述](#概述)
-- [用法](#用法)
+- [markdown-it-conditional-rendering](#markdown-it-conditional-rendering)
+  - [概述](#概述)
+  - [用法](#用法)
 
+# markdown-it-conditional-rendering
 ## 概述
 
-Markdown It 条件渲染插件，灵感来自 [markdown-it-condition](https://www.npmjs.com/package/markdown-it-condition)，原仓库已被删除或转移，从 NPM 获取到代码，见 [markdown-it-condition.js](./src/markdown-it-condition.js)
+Markdown It 条件渲染插件，灵感来自 [markdown-it-condition](https://www.npmjs.com/package/markdown-it-condition)，原仓库已被删除或转移，从 NPM 获取到代码，见 [lib/markdown-it-condition.js](./lib/markdown-it-condition.js)
 
 ## 用法
 
