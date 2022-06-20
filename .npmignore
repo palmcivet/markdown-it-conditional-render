@@ -1,12 +1,13 @@
 node_modules
-test
 src
+lib
+test
 script
-coverage
 docs
 demo
 dist
 example
+coverage
 
 # configuration file
 .czrc
@@ -24,4 +25,7 @@ example
 .commitlint.config
 .commitlint.config.js
 vite.config.js
+jest.config.js
 tsconfig.*.json
+pnpm-lock.yml
+index.html
