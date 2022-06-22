@@ -6,7 +6,7 @@ interface IMarkdownItIfElseOptions {
   elseifConditionMarker: string;
   endifConditionMarker: string;
   validate(raw: string): boolean;
-  evaluateCondition(condition: string, env: any): boolean;
+  evaluate(condition: string, env: any): boolean;
 }
 
 function beginsWith(text: string, marker: string): boolean {
@@ -20,7 +20,7 @@ export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, op
     elseifConditionMarker = "::elseif",
     endifConditionMarker = "::endif",
     validate = () => true,
-    evaluateCondition = (condition: string, env: any) => {
+    evaluate = (condition: string, env: any) => {
       const fields = condition.split(".");
       let element = env;
 
@@ -28,7 +28,7 @@ export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, op
         element = element[field];
       });
 
-      if (element) {
+      if (!!element) {
         return true;
       }
 
@@ -136,32 +136,38 @@ export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, op
     return true;
   });
 
-  md.core.ruler.push("evaluate_condition", (state) => {
-    console.log(state);
+  md.core.ruler.push("evaluate_condition", ({ tokens, env }) => {
+    let shouldRemove = false;
+    let isValid = false;
 
-    let validToken = true;
+    for (let index = 0; index < tokens.length; index++) {
+      const currentToken = tokens[index];
 
-    for (var tokenIndex = 0; tokenIndex < state.tokens.length; tokenIndex++) {
-      const token = state.tokens[tokenIndex];
-
-      console.log({ token });
-
-      switch (token.type) {
+      switch (currentToken.type) {
         case "condition_if":
+          isValid = evaluate(currentToken.info, env);
+          shouldRemove = !isValid;
+          break;
         case "condition_elseif":
-          validToken = evaluateCondition(token.info, state.env);
+          if (!isValid) {
+            isValid = evaluate(currentToken.info, env);
+            shouldRemove = !isValid;
+          } else {
+            shouldRemove = true;
+          }
           break;
         case "condition_else":
-          validToken = !validToken;
+          shouldRemove = isValid;
           break;
         case "condition_endif":
-          validToken = true;
+          shouldRemove = false;
           break;
         default:
-          if (!validToken) {
-            state.tokens.splice(tokenIndex, 1);
-            tokenIndex--;
+          if (shouldRemove) {
+            tokens.splice(index, 1);
+            index--;
           }
+          break;
       }
     }
 

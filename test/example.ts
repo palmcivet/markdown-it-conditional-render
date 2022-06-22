@@ -1,17 +1,17 @@
 export const raw_md = `
 ::if flag.value_1
 
-if => to be rendered
+if flag.value_1 === true
 
 ::elseif flag.value_2
 
-elseif => to be rendered
+elseif flag.value_2 === true
 
 ::else
 
-else => to be rendered
+else
 
 ::endif
 
-endif => always be rendered
+always
 `;
