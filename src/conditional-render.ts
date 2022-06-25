@@ -1,30 +1,31 @@
 import { PluginWithOptions } from "markdown-it";
 
-interface IMarkdownItIfElseOptions {
-  ifConditionMarker: string;
-  elseConditionMarker: string;
-  elseifConditionMarker: string;
-  endifConditionMarker: string;
-  validate(raw: string): boolean;
-  evaluate(condition: string, env: any): boolean;
+interface IMarkdownItOptions {
+  ruleName: string;
+  ifMarker: string;
+  elseMarker: string;
+  elseIfMarker: string;
+  endIfMarker: string;
+  validate(condition: string): boolean;
+  evaluate(condition: string, value: any): boolean;
 }
 
 function beginsWith(text: string, marker: string): boolean {
   return text.substring(0, marker.length) === marker;
 }
 
-export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, options): void => {
+export const plugin: PluginWithOptions<IMarkdownItOptions> = (md, options): void => {
   const {
-    ifConditionMarker = "::if",
-    elseConditionMarker = "::else",
-    elseifConditionMarker = "::elseif",
-    endifConditionMarker = "::endif",
-    validate = () => true,
-    evaluate = (condition: string, env: any) => {
-      const fields = condition.split(".");
-      let element = env;
+    ruleName = "condition",
+    ifMarker = "::if",
+    elseMarker = "::else",
+    elseIfMarker = "::elseif",
+    endIfMarker = "::endif",
+    validate = (condition: string) => true,
+    evaluate = (condition: string, value: any) => {
+      let element = value;
 
-      fields.forEach(function (field) {
+      condition.split(".").forEach((field) => {
         element = element[field];
       });
 
@@ -34,20 +35,20 @@ export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, op
 
       return false;
     },
-  } = options ?? {};
+  } = options || {};
 
-  md.block.ruler.before("fence", "condition_block", (state, startLine, endLine, silent) => {
-    var currentLine,
+  md.block.ruler.before("fence", `${ruleName}_block`, (state, startLine, endLine, silent) => {
+    let currentLine,
       token,
       start = state.bMarks[startLine] + state.tShift[startLine],
       max = state.eMarks[startLine];
 
     let condition: string;
 
-    var text = state.src.substring(start, max);
+    let text = state.src.substring(start, max);
 
-    if (beginsWith(text, ifConditionMarker)) {
-      condition = text.substring(ifConditionMarker.length + 1);
+    if (beginsWith(text, ifMarker)) {
+      condition = text.substring(ifMarker.length + 1);
     } else {
       return false;
     }
@@ -66,14 +67,14 @@ export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, op
     //
     currentLine = startLine;
 
-    token = state.push("condition_if", "", 1);
+    token = state.push(`${ruleName}_if`, "", 1);
     token.info = condition;
     token.map = [startLine, currentLine];
     token.hidden = true;
 
-    var lastLine = currentLine;
+    let lastLine = currentLine;
 
-    var oldLineMax = state.lineMax;
+    let oldLineMax = state.lineMax;
 
     for (;;) {
       currentLine++;
@@ -87,13 +88,13 @@ export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, op
       max = state.eMarks[currentLine];
       text = state.src.substring(start, max);
 
-      if (beginsWith(text, elseifConditionMarker)) {
+      if (beginsWith(text, elseIfMarker)) {
         // Tokenize everything before
         state.lineMax = currentLine;
         state.md.block.tokenize(state, lastLine + 1, currentLine);
 
-        condition = text.substring(elseifConditionMarker.length + 1);
-        token = state.push("condition_elseif", "", 1);
+        condition = text.substring(elseIfMarker.length + 1);
+        token = state.push(`${ruleName}_elseif`, "", 1);
         token.block = true;
         token.info = condition;
         token.map = [currentLine, currentLine];
@@ -101,24 +102,24 @@ export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, op
 
         lastLine = currentLine;
         state.lineMax = oldLineMax;
-      } else if (beginsWith(text, elseConditionMarker)) {
+      } else if (beginsWith(text, elseMarker)) {
         // Tokenize everything before
         state.lineMax = currentLine;
         state.md.block.tokenize(state, lastLine + 1, currentLine);
 
-        token = state.push("condition_else", "", 1);
+        token = state.push(`${ruleName}_else`, "", 1);
         token.block = true;
         token.map = [currentLine, currentLine];
         token.hidden = true;
 
         lastLine = currentLine;
         state.lineMax = oldLineMax;
-      } else if (beginsWith(text, endifConditionMarker)) {
+      } else if (beginsWith(text, endIfMarker)) {
         // Tokenize everything before
         state.lineMax = currentLine;
         state.md.block.tokenize(state, lastLine + 1, currentLine);
 
-        token = state.push("condition_endif", "", 1);
+        token = state.push(`${ruleName}_endif`, "", 1);
         token.block = true;
         token.map = [currentLine, currentLine];
         token.hidden = true;
@@ -136,7 +137,7 @@ export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, op
     return true;
   });
 
-  md.core.ruler.push("evaluate_condition", ({ tokens, env }) => {
+  md.core.ruler.push(`${ruleName}_evaluate`, ({ tokens, env }) => {
     let shouldRemove = false;
     let isValid = false;
 
@@ -144,11 +145,11 @@ export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, op
       const currentToken = tokens[index];
 
       switch (currentToken.type) {
-        case "condition_if":
+        case `${ruleName}_if`:
           isValid = evaluate(currentToken.info, env);
           shouldRemove = !isValid;
           break;
-        case "condition_elseif":
+        case `${ruleName}_elseif`:
           if (!isValid) {
             isValid = evaluate(currentToken.info, env);
             shouldRemove = !isValid;
@@ -156,10 +157,10 @@ export const ifElsePlugin: PluginWithOptions<IMarkdownItIfElseOptions> = (md, op
             shouldRemove = true;
           }
           break;
-        case "condition_else":
+        case `${ruleName}_else`:
           shouldRemove = isValid;
           break;
-        case "condition_endif":
+        case `${ruleName}_endif`:
           shouldRemove = false;
           break;
         default:

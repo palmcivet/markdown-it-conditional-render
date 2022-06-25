@@ -1,2 +1,2 @@
-import { ifElsePlugin } from "./markdown-it-if-else";
-export default ifElsePlugin;
+import { plugin } from "./conditional-render";
+export default plugin;
