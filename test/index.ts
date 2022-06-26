@@ -4,12 +4,7 @@ import { raw_md } from "./example";
 
 const engine = MarkdownIt();
 
-engine.use(markdownItIfElse, {
-  ifConditionMarker: "::if",
-  elseifConditionMarker: "::elseif",
-  elseConditionMarker: "::else",
-  endifConditionMarker: "::endif",
-});
+engine.use(markdownItIfElse);
 
 document.getElementById("raw")!.innerText = raw_md;
 document.getElementById("md")!.innerHTML = engine.render(raw_md, {

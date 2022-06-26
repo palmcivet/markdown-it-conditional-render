@@ -3,8 +3,8 @@ import { PluginWithOptions } from "markdown-it";
 interface IMarkdownItOptions {
   ruleName: string;
   ifMarker: string;
-  elseMarker: string;
   elseIfMarker: string;
+  elseMarker: string;
   endIfMarker: string;
   validate(condition: string): boolean;
   evaluate(condition: string, value: any): boolean;
@@ -18,8 +18,8 @@ export const plugin: PluginWithOptions<IMarkdownItOptions> = (md, options): void
   const {
     ruleName = "condition",
     ifMarker = "::if",
-    elseMarker = "::else",
     elseIfMarker = "::elseif",
+    elseMarker = "::else",
     endIfMarker = "::endif",
     validate = (condition: string) => true,
     evaluate = (condition: string, value: any) => {
