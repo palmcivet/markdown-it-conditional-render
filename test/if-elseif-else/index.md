@@ -1,4 +1,5 @@
-export const raw_md = `
+... normal
+
 ::if flag.value_1
 
 if flag.value_1 === true
@@ -13,5 +14,4 @@ else
 
 ::endif
 
-always
-`;
+normal ...

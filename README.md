@@ -1,9 +1,9 @@
 
 - [markdown-it-conditional-render](#markdown-it-conditional-render)
-	- [概述](#概述)
-	- [配置](#配置)
-	- [示例](#示例)
-	- [TODO](#todo)
+  - [概述](#概述)
+  - [配置](#配置)
+  - [示例](#示例)
+  - [TODO](#todo)
 
 # markdown-it-conditional-render
 ## 概述
@@ -13,26 +13,26 @@ Markdown It 条件渲染插件，灵感来自 [markdown-it-condition](https://ww
 ## 配置
 
 - `ruleName`
-    - *string*。默认 `condition`
-    - 自定义规则名
+  - *string*。默认 `condition`
+  - 自定义规则名
 - `ifMarker`
-    - *string*。默认 `::if`
-    - 开始判断，if 分支条件
+  - *string*。默认 `::if`
+  - 开始判断，if 分支条件
 - `elseIfMarker`
-    - *string*。默认 `::elseif`
-    - else if 分支条件
+  - *string*。默认 `::elseif`
+  - else if 分支条件
 - `elseMarker`
-    - *string*。默认 `::else`
-    - else 分支条件
+  - *string*。默认 `::else`
+  - else 分支条件
 - `endIfMarker`
-    - *string*。默认 `::endif`
-    - 结束判断
+  - *string*。默认 `::endif`
+  - 结束判断
 - `validate(condition: string): boolean`
-    - 预处理原始文本，验证文本中的分支条件
-    - 默认返回 `true`
+  - 预处理原始文本，验证文本中的分支条件
+  - 默认返回 `true`
 - `evaluate(condition: string, value: any): boolean`
-    - 解析实际参数，移除不满足条件的文本
-    - 默认处理如下：
+  - 解析实际参数，移除不满足条件的文本
+  - 默认处理如下：
 
 	```ts
 	function evaluate(condition: string, value: any) {
@@ -86,7 +86,7 @@ console.log(res);
 - [x] 完善 API
 - [x] 完善项目命名
 - [x] 完善文档
-- [ ] 添加单元测试
+- [x] 添加单元测试
 - [ ] 添加 GitHub Actions
 - [ ] 添加 Playground
 - [ ] 支持嵌套条件判断
