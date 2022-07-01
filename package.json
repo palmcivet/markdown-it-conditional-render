@@ -15,7 +15,7 @@
     "markdown-it-plugin"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite demo",
     "test": "jest",
     "build": "vite build"
   },

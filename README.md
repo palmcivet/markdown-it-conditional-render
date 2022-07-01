@@ -88,5 +88,5 @@ console.log(res);
 - [x] 完善文档
 - [x] 添加单元测试
 - [ ] 添加 GitHub Actions
-- [ ] 添加 Playground
+- [x] 添加 Playground
 - [ ] 支持嵌套条件判断
