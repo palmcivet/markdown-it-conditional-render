@@ -1,0 +1,53 @@
+name: build
+
+on: push
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛎️ Checkout GitHub
+        uses: actions/checkout@master
+
+      - name: 🚧 Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7
+
+      - name: 🔨 Install and Build
+        run: |
+          pnpm install
+          pnpm run build:doc
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+          branch: gh-pages
+          folder: "demo/dist"
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛎️ Checkout GitHub
+        uses: actions/checkout@master
+
+      - name: 🚧 Setup Node
+        uses: actions/setup-node@v2
+        with:
+          registry-url: "https://registry.npmjs.org"
+
+      - name: 🔨 Install and Build
+        run: |
+          pnpm install
+          pnpm run build:lib
+
+      - name: 📚 Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "/dist"
+
+      - name: 📦 Publish to NPM
+        run: pnpm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

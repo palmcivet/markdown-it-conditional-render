@@ -1,12 +1,11 @@
 
 - [markdown-it-conditional-render](#markdown-it-conditional-render)
-  - [概述](#概述)
   - [配置](#配置)
   - [示例](#示例)
+  - [开发](#开发)
   - [TODO](#todo)
 
 # markdown-it-conditional-render
-## 概述
 
 Markdown It 条件渲染插件，灵感来自 [markdown-it-condition](https://www.npmjs.com/package/markdown-it-condition)，原仓库已被删除或转移，但 NPM 仍可获取到代码，已摘录于 [lib/markdown-it-condition.js](./lib/markdown-it-condition.js)
 
@@ -81,12 +80,21 @@ const res = markdownItEngine.render(
 console.log(res);
 ```
 
+## 开发
+
+```bash
+$ git clone https://github.com/palmcivet/markdown-it-conditional-render.git
+$ cd ./markdown-it-conditional-render
+$ pnpm add
+$ pnpm run build
+```
+
 ## TODO
 
 - [x] 完善 API
 - [x] 完善项目命名
 - [x] 完善文档
 - [x] 添加单元测试
-- [ ] 添加 GitHub Actions
+- [x] 添加 GitHub Actions
 - [x] 添加 Playground
 - [ ] 支持嵌套条件判断

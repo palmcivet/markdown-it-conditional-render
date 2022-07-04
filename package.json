@@ -17,7 +17,8 @@
   "scripts": {
     "dev": "vite demo",
     "test": "jest",
-    "build": "vite build"
+    "build:doc": "vite build demo",
+    "build:lib": "vite build"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.3",
