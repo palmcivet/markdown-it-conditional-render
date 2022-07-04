@@ -30,9 +30,10 @@
     "vite": "^2.9.12"
   },
   "peerDependencies": {
-    "markdown-it": "^13.0.1"
+    "markdown-it": "13"
   },
   "optionalDependencies": {
+    "markdown-it": "^13.0.1",
     "@types/jest": "^28.1.2",
     "@types/markdown-it": "^12.2.3"
   }
