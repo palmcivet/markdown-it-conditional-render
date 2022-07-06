@@ -8,7 +8,6 @@ export default defineConfig({
     lib: {
       formats: ["es", "cjs"],
       entry: resolve(__dirname, "src/index.ts"),
-      name: "markdown-it-conditional-render",
       fileName: "index",
     },
   },
