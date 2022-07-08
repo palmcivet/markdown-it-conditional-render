@@ -1,37 +1,38 @@
 
 - [markdown-it-conditional-render](#markdown-it-conditional-render)
-  - [⚙️ Options](#️-options)
-  - [📚 Example](#-example)
-  - [🔧 Develop](#-develop)
-  - [⚖️ License](#️-license)
+  - [⚙️ 配置](#️-配置)
+  - [📚 示例](#-示例)
+  - [🔧 开发](#-开发)
+  - [📅 TODO](#-todo)
+  - [⚖️ 许可证](#️-许可证)
 
 # markdown-it-conditional-render
 
-Markdown It conditional rendering plugin, inspired by [markdown-it-condition](https://www.npmjs.com/package/markdown-it-condition), the original repository has been removed or moved, but the compiled and compressed code is still available in NPM and has been extracted from [lib/markdown-it-condition.js](./lib/markdown-it-condition.js).
+Markdown It 条件渲染插件，灵感来自 [markdown-it-condition](https://www.npmjs.com/package/markdown-it-condition)，原仓库已被删除或转移，但 NPM 仍可获取到代码，已摘录于 [lib/markdown-it-condition.js](./lib/markdown-it-condition.js)
 
-## ⚙️ Options
+## ⚙️ 配置
 
 - `ruleName`：*string*
-  - Default: `condition`
-  - Custom rule name
+  - 默认 `condition`
+  - 自定义规则名
 - `ifMarker`：*string*
-  - Default: `::if`
-  - Judging from here, *if* branching condition
+  - 默认 `::if`
+  - 开始判断，if 分支条件
 - `elseIfMarker`：*string*
-  - Default: `::elseif`
-  - *else if* branching condition
+  - 默认 `::elseif`
+  - else if 分支条件
 - `elseMarker`：*string*
-  - Default: `::else`
-  - *else* branching condition
+  - 默认 `::else`
+  - else 分支条件
 - `endIfMarker`：*string*
-  - Default: `::endif`
-  - End of judgment
+  - 默认 `::endif`
+  - 结束判断
 - `validate(condition: string): boolean`
-  - Preprocess the original text and verify the branching conditions in the text
-  - Default returns `true`
+  - 预处理原始文本，验证文本中的分支条件
+  - 默认返回 `true`
 - `evaluate(condition: string, value: any): boolean`
-  - Parse the actual parameters and remove the text that does not meet the conditions
-  - The default processing is as follows：
+  - 解析实际参数，移除不满足条件的文本
+  - 默认处理如下：
 
 	```ts
 	function evaluate(condition: string, value: any) {
@@ -48,9 +49,9 @@ Markdown It conditional rendering plugin, inspired by [markdown-it-condition](ht
 	}
 	```
 
-> The full usage of each parameter by default is shown in the [example](#-example)
+> 各参数缺省时的完整使用方式见 [示例](#示例)
 
-## 📚 Example
+## 📚 示例
 
 ```js
 const MarkdownIt = require("markdown-it")
@@ -80,7 +81,7 @@ const res = markdownItEngine.render(
 console.log(res);
 ```
 
-## 🔧 Develop
+## 🔧 开发
 
 ```bash
 $ git clone https://github.com/palmcivet/markdown-it-conditional-render.git
@@ -89,6 +90,16 @@ $ pnpm add
 $ pnpm run build
 ```
 
-## ⚖️ License
+## 📅 TODO
+
+- [x] 完善 API
+- [x] 完善项目命名
+- [x] 完善文档
+- [x] 添加单元测试
+- [x] 添加 GitHub Actions
+- [x] 添加 Playground
+- [ ] 支持嵌套条件判断
+
+## ⚖️ 许可证
 
 MIT
