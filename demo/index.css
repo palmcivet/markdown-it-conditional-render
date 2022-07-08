@@ -12,6 +12,7 @@ code {
 
 textarea {
   resize: none;
+  outline: 0;
 }
 
 .tips {
@@ -28,8 +29,18 @@ textarea {
   justify-content: center;
 }
 
+.tips-description .title {
+  font-weight: 500;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.tips-description .link {
+  margin-top: 12px;
+}
+
 .tips-options {
-  width: 40%;
+  width: calc(50% - 30px);
   margin: 8px 0;
   padding: 8px;
   border: 4px solid skyblue;

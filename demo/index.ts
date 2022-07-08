@@ -1,5 +1,6 @@
 import MarkdownIt from "markdown-it";
 import markdownItConditionalRender from "../src/index";
+import { version } from "../package.json";
 
 const engine = MarkdownIt();
 engine.use(markdownItConditionalRender);
@@ -49,4 +50,6 @@ normal ...`;
   }
 }`;
   nodeOptions.dispatchEvent(new Event("input"));
+
+  document.getElementById("version")!.innerText = `v${version}`;
 });

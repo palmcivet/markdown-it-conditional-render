@@ -5,6 +5,8 @@
   "author": "Palm Civet <palmcivet_email@qq.com>",
   "license": "MIT",
   "homepage": "https://palmcivet.github.io/markdown-it-conditional-render",
+  "repository": "https://github.com/palmcivet/markdown-it-conditional-render.git",
+  "bugs": "https://github.com/palmcivet/markdown-it-conditional-render/issues",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "files": [
@@ -13,7 +15,9 @@
   "types": "dist/index.d.ts",
   "keywords": [
     "markdown-it",
-    "markdown-it-plugin"
+    "markdown-it-plugin",
+    "markdown-it-condition",
+    "conditional-rendering"
   ],
   "scripts": {
     "dev": "vite ./demo",
