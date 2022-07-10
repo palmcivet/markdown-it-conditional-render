@@ -1,11 +1,6 @@
-
-- [markdown-it-conditional-render](#markdown-it-conditional-render)
-  - [⚙️ Options](#️-options)
-  - [📚 Example](#-example)
-  - [🔧 Develop](#-develop)
-  - [⚖️ License](#️-license)
-
 # markdown-it-conditional-render
+
+English | [中文](./README.zh-CN.md)
 
 Markdown It conditional rendering plugin, inspired by [markdown-it-condition](https://www.npmjs.com/package/markdown-it-condition), the original repository has been removed or moved, but the compiled and compressed code is still available in NPM and has been extracted from [lib/markdown-it-condition.js](./lib/markdown-it-condition.js).
 

@@ -1,12 +1,6 @@
-
-- [markdown-it-conditional-render](#markdown-it-conditional-render)
-  - [⚙️ 配置](#️-配置)
-  - [📚 示例](#-示例)
-  - [🔧 开发](#-开发)
-  - [📅 TODO](#-todo)
-  - [⚖️ 许可证](#️-许可证)
-
 # markdown-it-conditional-render
+
+[English](./README.md) | 中文
 
 Markdown It 条件渲染插件，灵感来自 [markdown-it-condition](https://www.npmjs.com/package/markdown-it-condition)，原仓库已被删除或转移，但 NPM 仍可获取到代码，已摘录于 [lib/markdown-it-condition.js](./lib/markdown-it-condition.js)
 
