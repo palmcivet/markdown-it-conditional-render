@@ -1,5 +1,7 @@
 # markdown-it-conditional-render
 
+[![build](https://github.com/palmcivet/markdown-it-conditional-render/actions/workflows/build.yml/badge.svg)](https://github.com/palmcivet/markdown-it-conditional-render/actions/workflows/build.yml)
+
 [English](./README.md) | 中文
 
 Markdown It 条件渲染插件，灵感来自 [markdown-it-condition](https://www.npmjs.com/package/markdown-it-condition)，原仓库已被删除或转移，但 NPM 仍可获取到代码，已摘录于 [lib/markdown-it-condition.js](./lib/markdown-it-condition.js)

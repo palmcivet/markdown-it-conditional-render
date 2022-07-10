@@ -1,5 +1,7 @@
 # markdown-it-conditional-render
 
+[![build](https://github.com/palmcivet/markdown-it-conditional-render/actions/workflows/build.yml/badge.svg)](https://github.com/palmcivet/markdown-it-conditional-render/actions/workflows/build.yml)
+
 English | [中文](./README.zh-CN.md)
 
 Markdown It conditional rendering plugin, inspired by [markdown-it-condition](https://www.npmjs.com/package/markdown-it-condition), the original repository has been removed or moved, but the compiled and compressed code is still available in NPM and has been extracted from [lib/markdown-it-condition.js](./lib/markdown-it-condition.js).
